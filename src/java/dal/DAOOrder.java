@@ -282,7 +282,7 @@ public class DAOOrder extends DBConnect {
                             + "           ,[quantity]\n"
                             + "           ,[price]\n"
                             + "           ,[discount])\n"
-                            + "     VALUES(?, ?, ?, ?, ?,?)";
+                            + "     VALUES(?, ?, ?, ?, ?, ?)";
                     PreparedStatement st3 = connection.prepareStatement(sql3);
                     st3.setInt(1, newOrderItemId);
                     st3.setInt(2, orderId);

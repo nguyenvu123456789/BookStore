@@ -130,6 +130,18 @@
                                                            value="${account.address}" class="form-control px-4 py-3 fs-3" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
+
+                                            <div class="mt-5" style="color: black;">
+                                                <h3>Gender</h3>
+                                                <div class="input-group mb-3 rounded-xl">
+                                                    <span class="input-group-text p-4" id="basic-addon1">
+                                                        <i class="fa-solid fa-user fs-3" style="color: #808080;"></i>
+                                                    </span>
+                                                    <input type="text" name="gender" readonly value="${account.gender}" class="form-control px-4 py-3 fs-3" placeholder="Gender" aria-label="Gender" aria-describedby="basic-addon1" style="color: #808080;">
+                                                </div>
+                                            </div>
+
+
                                             <div class="mt-5">
                                                 <h3>Phone</h3>
                                                 <div class="input-group mb-3 rounded-xl">
@@ -140,6 +152,8 @@
                                                            value="${account.phone}"  class="form-control px-4 py-3 fs-3" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
+
+
 
                                             <div class="mt-5">
                                                 <h3>About you</h3>

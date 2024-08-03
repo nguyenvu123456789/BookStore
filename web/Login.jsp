@@ -46,7 +46,7 @@
                     </div>
                     <button type="submit" class="d-flex align-items-center justify-content-center mt-5 fw-bold py-2 fs-4 px-5 btn bg-danger text-white mx-auto">Submit</button>
                     <div class="text-center mt-3">
-                        <a href="ForgetPassword.jsp" class="forget-password-link">Forget password?</a>
+                        <a href="ForgotPassword.jsp" class="forget-password-link">Forget password?</a>
                     </div>
                 </div>
             </form>

@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAOAccount extends DBConnect {
-
+java.sql.Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
     // Display all accounts
     public ArrayList<Account> getAllAccount() {
         String sql = "SELECT * FROM Account WHERE 1=1";
@@ -161,9 +165,9 @@ public class DAOAccount extends DBConnect {
     }
 
     // Update account information
-    public boolean updateAccount(int account_id, String email, String first_name, String last_name, String phone, String account_image, String address, String account_description) {
+    public boolean updateAccount(int account_id, String email, String first_name, String last_name, String phone, String account_image, String address, String account_description, String gender, String dateOfBirth) {
         String sql = "UPDATE Account SET email = ?, first_name = ?, last_name = ?,"
-                + " phone = ?, account_image = ?, address = ?, description = ? WHERE account_id = ?";
+                + " phone = ?, account_image = ?, address = ?, description = ?, gender = ?, DateOfBirth = ? WHERE account_id = ?";
         int n = 0;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -174,7 +178,51 @@ public class DAOAccount extends DBConnect {
             st.setString(5, account_image);
             st.setString(6, address);
             st.setString(7, account_description);
-            st.setInt(8, account_id);
+            st.setString(8, gender);
+            st.setString(9, dateOfBirth);
+            st.setInt(10, account_id);
+            n = st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return n > 0;
+    }
+public static void main(String[] args) {
+    DAOAccount instance = new DAOAccount();
+    boolean result = instance.updateAccount(
+        1, // account_id
+        "newemail@example.com",
+        "NewFirstName",
+        "NewLastName",
+        "123456789",
+        "newImagePath.jpg",
+        "New Address",
+        "New account description",
+        "Male",
+        "1990-01-01"
+    );
+    
+    if (result) {
+        System.out.println("Cập nhật tài khoản thành công.");
+    } else {
+        System.out.println("Cập nhật tài khoản thất bại.");
+    }
+}
+
+    // Add new account
+    public boolean addAccount(Account acc) {
+        String sql = "INSERT INTO Account (account_id, email, first_name, last_name, phone, password, DateOfBirth, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int n = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, acc.getAccount_id());
+            st.setString(2, acc.getEmail());
+            st.setString(3, acc.getFirst_name());
+            st.setString(4, acc.getLast_name());
+            st.setString(5, acc.getPhone());
+            st.setString(6, acc.getPassword());
+            st.setString(7, acc.getDateOFBirth());
+            st.setString(8, acc.getGender());
             n = st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -182,25 +230,20 @@ public class DAOAccount extends DBConnect {
         return n > 0;
     }
 
-    // Add new account
-    public boolean addAccount(Account acc) {
-    String sql = "INSERT INTO Account (account_id, email, first_name, last_name, phone, password, DateOfBirth, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    int n = 0;
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        st.setInt(1, acc.getAccount_id());
-        st.setString(2, acc.getEmail());
-        st.setString(3, acc.getFirst_name());
-        st.setString(4, acc.getLast_name());
-        st.setString(5, acc.getPhone());
-        st.setString(6, acc.getPassword());
-        st.setString(7, acc.getDateOFBirth()); 
-        st.setString(8, acc.getGender()); 
-        n = st.executeUpdate();
-    } catch (SQLException e) {
-        System.out.println(e);
+     public void changePassword(String password, int id) throws SQLException {
+
+        String sql = "UPDAte Account\n"
+                + "set password=?\n"
+                + "where account_id=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(DAOAccount.class.getName()).log(Level.SEVERE, null, e);
+
+        }
     }
-    return n > 0;
-}
 
 }

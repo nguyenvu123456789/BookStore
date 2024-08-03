@@ -28,15 +28,15 @@ public class ProfileServlet extends HttpServlet {
         String[] listService = {"Account info", "My order", "Change password"};
         request.setAttribute("listService", listService);
         DAOOrder o = new DAOOrder();
-        Account acc = (Account)session.getAttribute("account");
+        Account acc = (Account) session.getAttribute("account");
         String service = request.getParameter("Service");
-        
+
         if (acc != null) {
             if (service == null) {
                 service = listService[0];
             }
-            
-            if(service.equals(listService[1])) {
+
+            if (service.equals(listService[1])) {
                 DAOOrderDetail doi = new DAOOrderDetail();
                 DAOOrder dorder = new DAOOrder();
                 int accId = acc.getAccount_id();
@@ -92,6 +92,8 @@ public class ProfileServlet extends HttpServlet {
         String account_address = request.getParameter("account_address");
         String account_phone = request.getParameter("account_phone");
         String account_description = request.getParameter("account_description");
+        String gender = request.getParameter("gender");
+        String dateOfBirth = request.getParameter("date_of_birth");
 
         String mess = "";
         boolean isSuccess = false;
@@ -99,7 +101,7 @@ public class ProfileServlet extends HttpServlet {
         if (isValidName(first_name) && isValidName(last_name)) {
             boolean haveUpdate = d.updateAccount(
                     acc.getAccount_id(), account_email, first_name, last_name,
-                    account_phone, accountImage, account_address, account_description
+                    account_phone, accountImage, account_address, account_description, gender, dateOfBirth
             );
 
             Account updatedAccount = d.getAccountById(acc.getAccount_id());

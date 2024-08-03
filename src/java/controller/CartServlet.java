@@ -97,7 +97,7 @@ public class CartServlet extends HttpServlet {
         }
         
         if(service.equals("addQuantity")) {
-         String pid_raw = request.getParameter("product_id");
+         String pid_raw = request.getParameter("book_id");
          int pid = Integer.parseInt(pid_raw);
          String key = "cart-" + pid_raw;
          Book p_root = dp.getProductById(pid);
@@ -130,7 +130,7 @@ public class CartServlet extends HttpServlet {
            response.sendRedirect("CartURL");
         }
         if(service.equals("minusQuantity")) {
-         String pid_raw = request.getParameter("product_id");
+         String pid_raw = request.getParameter("book_id");
          int pid = Integer.parseInt(pid_raw);
          String key = "cart-" + pid_raw;
          Book p = (Book)session.getAttribute(key);
@@ -162,7 +162,7 @@ public class CartServlet extends HttpServlet {
         }
         
         if(service.equals("deleteInCart")) {
-          String pid_raw = request.getParameter("product_id");
+          String pid_raw = request.getParameter("book_id");
           String key = "cart-" + pid_raw;
           session.removeAttribute(key);
           response.sendRedirect("CartURL");
