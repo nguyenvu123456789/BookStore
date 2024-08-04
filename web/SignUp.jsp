@@ -27,8 +27,8 @@
                 width: 100%;
                 max-width: 600px;
                 border-radius: 15px;
-                padding: 40px; /* Increase padding for more space */
-                min-height: 700px; /* Set a minimum height */
+                padding: 40px;
+                min-height: 700px;
             }
 
             .form-control-custom {
@@ -63,6 +63,7 @@
                     <div class="">
                         <div class="d-flex mt-5">
                             <div class="me-3">
+                                <!-- Name Input Field -->
                                 <div class="d-flex align-items-center fs-4 mt-3">
                                     <input type="text" placeholder="First Name"
                                            style="${(first_name.equals("error")) ? "border-bottom: 1px solid red !important;" : ''}"
@@ -79,6 +80,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Email Input Field -->
                         <div class="mt-5">
                             <div class="d-flex align-items-center fs-4 mt-3">
                                 <i class='bx bx-envelope'></i>
@@ -97,6 +100,19 @@
                                        class="w-100 py-4 outline-0 border-0 ms-3 border-bottom" />
                             </div>
                         </div>
+
+                        <!-- Address Input Field -->
+                        <div class="mt-5">
+                            <div class="d-flex align-items-center fs-4 mt-3">
+                                <i class='bx bx-map'></i>
+                                <input type="text" placeholder="Address"
+                                       style="${address.equals("error") ? "border-bottom: 1px solid red !important;" : ''}"
+                                       value="${!address.equals("error")?address:""}" name="address"
+                                       class="w-100 py-4 outline-0 border-0 ms-3 border-bottom" />
+                            </div>
+                        </div>
+
+                        <!-- Date of Birth Input Field -->
                         <div class="mt-5">
                             <div class="d-flex align-items-center fs-4 mt-3">
                                 <i class='bx bx-calendar'></i>
@@ -106,6 +122,8 @@
                                        class="w-100 py-4 outline-0 border-0 ms-3 border-bottom" />
                             </div>
                         </div>
+
+                        <!-- Gender Input Field -->              
                         <div class="mt-5">
                             <div class="d-flex align-items-center fs-4 mt-3">
                                 <i class='bx bx-male'></i>
@@ -137,6 +155,8 @@
                                 }
                             });
                         </script>
+
+                        <!-- Password Input Field -->
                         <div class="border-bottom mt-5">
                             <div class="d-flex align-items-center fs-4 mt-3">
                                 <i class='bx bx-lock'></i>

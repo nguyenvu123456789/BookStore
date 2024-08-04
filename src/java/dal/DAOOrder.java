@@ -34,6 +34,7 @@ public class DAOOrder extends DBConnect {
                 Account acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -96,6 +97,7 @@ public class DAOOrder extends DBConnect {
                 Account acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -141,6 +143,7 @@ public class DAOOrder extends DBConnect {
                 Account acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -180,6 +183,7 @@ public class DAOOrder extends DBConnect {
                 Account acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),

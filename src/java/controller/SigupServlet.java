@@ -78,56 +78,57 @@ public class SigupServlet extends HttpServlet {
         String last_name = request.getParameter("last_name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String dateofbirth = request.getParameter("dateofbirth"); 
+        String address = request.getParameter("address"); 
+        String dateofbirth = request.getParameter("dateofbirth");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String gender = request.getParameter("gender");
 
-        // Check input data
-        if (first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || phone.isEmpty() || dateofbirth.isEmpty() || password.isEmpty() || gender.isEmpty()) {
+        // Kiểm tra dữ liệu đầu vào
+        if (first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || dateofbirth.isEmpty() || password.isEmpty() || gender.isEmpty()) {
             String mess = "Please fill in all fields.";
-            setCommonValues(request, response, mess, first_name, last_name, email, phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, email, phone, address, dateofbirth, gender);
             return;
         }
 
-        // Check format of names
+        // Kiểm tra định dạng của tên
         if (!isValidName(first_name) || !isValidName(last_name)) {
             String mess = "Names cannot contain numbers or special characters.";
-            setCommonValues(request, response, mess, first_name, last_name, email, phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, email, phone, address, dateofbirth, gender);
             return;
         }
 
-        // Check format of email
+        // Kiểm tra định dạng email
         if (!isValidEmail(email)) {
             String mess = "Invalid email format.";
-            setCommonValues(request, response, mess, first_name, last_name, "", phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, "", phone, address, dateofbirth, gender);
             return;
         }
 
-        // Check format of password
+        // Kiểm tra định dạng mật khẩu
         if (!isValidPassword(password)) {
             String mess = "Password must be at least 8 characters long and contain a combination of letters and numbers.";
-            setCommonValues(request, response, mess, first_name, last_name, email, phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, email, phone, address, dateofbirth, gender);
             return;
         }
 
-        // Check if password matches confirm password
+        // Kiểm tra xem mật khẩu có trùng khớp không
         if (!password.equals(confirmPassword)) {
             String mess = "Password and confirm password do not match.";
-            setCommonValues(request, response, mess, first_name, last_name, email, phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, email, phone, address, dateofbirth, gender);
             return;
         }
 
-        // Check for duplicate email
+        // Kiểm tra email có trùng không
         Account haveExistEmail = d.getAccountByEmail(email);
         if (haveExistEmail != null) {
             String mess = "Email already exists.";
-            setCommonValues(request, response, mess, first_name, last_name, "", phone, dateofbirth, gender);
+            setCommonValues(request, response, mess, first_name, last_name, "", phone, address, dateofbirth, gender);
             return;
         }
 
         int newId = d.getAllAccount().get(d.getAllAccount().size() - 1).getAccount_id() + 1;
-        Account acc = new Account(newId, newId, first_name, last_name, phone, email, password, last_name, gender, dateofbirth, dateofbirth, gender);
+        Account acc = new Account(newId, 7, 1, first_name, last_name, phone, email, password, last_name, address, dateofbirth, dateofbirth, gender); 
         boolean haveAdd = d.addAccount(acc);
         HttpSession session = request.getSession();
         if (haveAdd) {
@@ -141,12 +142,13 @@ public class SigupServlet extends HttpServlet {
     }
 
     private void setCommonValues(HttpServletRequest request, HttpServletResponse response, String mess, String first_name,
-            String last_name, String email, String phone, String dateofbirth, String gender) throws ServletException, IOException {
+            String last_name, String email, String phone, String address, String dateofbirth, String gender) throws ServletException, IOException {
         request.setAttribute("message", mess);
         request.setAttribute("first_name", first_name);
         request.setAttribute("last_name", last_name);
         request.setAttribute("email", email);
         request.setAttribute("phone", phone);
+        request.setAttribute("address", address); // Thêm address vào đây
         request.setAttribute("dateofbirth", dateofbirth);
         request.setAttribute("gender", gender);
         request.getRequestDispatcher("SignUp.jsp").forward(request, response);
@@ -164,13 +166,6 @@ public class SigupServlet extends HttpServlet {
         return password.length() >= 8 && password.matches(".*[A-Za-z].*") && password.matches(".*\\d.*");
     }
 
-    
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

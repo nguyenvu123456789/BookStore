@@ -7,15 +7,16 @@ import java.util.Date;
  * @author HP
  */
 public class Account {
-    private int account_id,role_id;
-    private String first_name, last_name, phone, email, password, account_image, address,description,DateOFBirth,gender;
+    private int account_id,role_id, active;
+    private String first_name, last_name, phone, email, password, account_image, address ,description,DateOFBirth,gender;
 
     public Account() {
     }
 
-    public Account(int account_id, int role_id, String first_name, String last_name, String phone, String email, String password, String account_image, String address, String description, String DateOFBirth, String gender) {
+    public Account(int account_id, int role_id, int active, String first_name, String last_name, String phone, String email, String password, String account_image, String address, String description, String DateOFBirth, String gender) {
         this.account_id = account_id;
         this.role_id = role_id;
+        this.active = active;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
@@ -27,6 +28,7 @@ public class Account {
         this.DateOFBirth = DateOFBirth;
         this.gender = gender;
     }
+
 
     public int getAccount_id() {
         return account_id;
@@ -42,6 +44,14 @@ public class Account {
 
     public void setRole_id(int role_id) {
         this.role_id = role_id;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public String getFirst_name() {
@@ -126,9 +136,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "account_id=" + account_id + ", role_id=" + role_id + ", first_name=" + first_name + ", last_name=" + last_name + ", phone=" + phone + ", email=" + email + ", password=" + password + ", account_image=" + account_image + ", address=" + address + ", description=" + description + ", DateOFBirth=" + DateOFBirth + ", gender=" + gender + '}';
+        return "Account{" + "account_id=" + account_id + ", role_id=" + role_id + ", active=" + active + ", first_name=" + first_name + ", last_name=" + last_name + ", phone=" + phone + ", email=" + email + ", password=" + password + ", account_image=" + account_image + ", address=" + address + ", description=" + description + ", DateOFBirth=" + DateOFBirth + ", gender=" + gender + '}';
     }
-    
 
+    
     
 }

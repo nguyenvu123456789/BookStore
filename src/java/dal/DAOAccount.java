@@ -9,9 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DAOAccount extends DBConnect {
-java.sql.Connection conn = null;
+
+    java.sql.Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+
     // Display all accounts
     public ArrayList<Account> getAllAccount() {
         String sql = "SELECT * FROM Account WHERE 1=1";
@@ -23,6 +25,7 @@ java.sql.Connection conn = null;
                 Account acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -54,6 +57,7 @@ java.sql.Connection conn = null;
                 acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -85,6 +89,7 @@ java.sql.Connection conn = null;
                 acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -117,6 +122,7 @@ java.sql.Connection conn = null;
                 acc = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("role_id"),
+                        rs.getInt("active"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("phone"),
@@ -187,31 +193,32 @@ java.sql.Connection conn = null;
         }
         return n > 0;
     }
-public static void main(String[] args) {
-    DAOAccount instance = new DAOAccount();
-    boolean result = instance.updateAccount(
-        1, // account_id
-        "newemail@example.com",
-        "NewFirstName",
-        "NewLastName",
-        "123456789",
-        "newImagePath.jpg",
-        "New Address",
-        "New account description",
-        "Male",
-        "1990-01-01"
-    );
-    
-    if (result) {
-        System.out.println("Cập nhật tài khoản thành công.");
-    } else {
-        System.out.println("Cập nhật tài khoản thất bại.");
+
+    public static void main(String[] args) {
+        DAOAccount instance = new DAOAccount();
+        boolean result = instance.updateAccount(
+                1, // account_id
+                "newemail@example.com",
+                "NewFirstName",
+                "NewLastName",
+                "123456789",
+                "newImagePath.jpg",
+                "New Address",
+                "New account description",
+                "Male",
+                "1990-01-01"
+        );
+
+        if (result) {
+            System.out.println("Cập nhật tài khoản thành công.");
+        } else {
+            System.out.println("Cập nhật tài khoản thất bại.");
+        }
     }
-}
 
     // Add new account
     public boolean addAccount(Account acc) {
-        String sql = "INSERT INTO Account (account_id, email, first_name, last_name, phone, password, DateOfBirth, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Account (account_id, email, first_name, last_name, phone, password, DateOfBirth, gender, role_id, active, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int n = 0;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -223,6 +230,9 @@ public static void main(String[] args) {
             st.setString(6, acc.getPassword());
             st.setString(7, acc.getDateOFBirth());
             st.setString(8, acc.getGender());
+            st.setInt(9, acc.getRole_id()); 
+            st.setInt(10, acc.getActive()); 
+            st.setString(11, acc.getAddress()); 
             n = st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -230,7 +240,7 @@ public static void main(String[] args) {
         return n > 0;
     }
 
-     public void changePassword(String password, int id) throws SQLException {
+    public void changePassword(String password, int id) throws SQLException {
 
         String sql = "UPDAte Account\n"
                 + "set password=?\n"
