@@ -44,13 +44,13 @@ public class NewPassword extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("Login.jsp");
                 } else {
                     request.setAttribute("status", "resetFailed");
-                    dispatcher = request.getRequestDispatcher("newPassword.jsp");
+                    dispatcher = request.getRequestDispatcher("NewPassword.jsp");
                 }
                 dispatcher.forward(request, response);
 
             } else {
                 request.setAttribute("status", "New password and confirm receive password are not the same");
-                request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+                request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
             }
         } catch (Exception e){
             

@@ -38,17 +38,28 @@
                     <div class="text-center mt-3">
                         <a href="login" class="back-to-login-link">Back to login</a>
                     </div>
+                    <div class="instructions mt-5">
+                        <h2 class="text-center">How to reset your password:</h2>
+                        <ol class="list-group list-group-numbered mt-3">
+                            <li class="list-group-item">Enter your email address in the field above.</li>
+                            <li class="list-group-item">Click the "Submit" button.</li>
+                            <li class="list-group-item">Check your email for a password reset link.</li>
+                            <li class="list-group-item">Follow the instructions in the email to reset your password.</li>
+                        </ol>
+                    </div>
                 </div>
             </form>
         </section>
     </body>
 </html>
 <style>
-
-
     .forgot-password-body {
         background-color: rgb(255, 235, 0);
         background: linear-gradient(0deg, rgba(255, 235, 0, 0.14338235294117652) 0%, rgba(253, 45, 245, 0.11257002801120453) 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .error-message {
@@ -69,5 +80,10 @@
 
     .back-to-login-link:hover {
         text-decoration: underline; /* gạch chân khi hover */
+    }
+
+    .instructions {
+        color: #000; /* Set the color of the instructions */
+        font-size: 1.2rem; /* Increase the font size */
     }
 </style>
